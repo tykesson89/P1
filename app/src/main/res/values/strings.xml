@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">P1</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ny_inkomst">Ny Inkomst</string>
+    <string name="ny_utgift">Ny Utgift</string>
+    <string name="sammanst_llning_av_ekonomi">Sammanställning av ekonomi</string>
+    <string name="l_gg_till_ny_inkomst">Lägg till ny inkomst</string>
+    <string name="kategori">Kategori:</string>
+    <string name="datum">Datum:</string>
+    <string name="titel">Titel:</string>
+    <string name="belopp">Belopp:</string>
+    <string name="namn">Förnamn:</string>
+    <string name="efternamn">Efternamn:</string>
+    <string name="logga_in">Logga in</string>
+    <string name="inkomst">Inkomster:</string>
+    <string name="utgifter">Utgifter:</string>
+    <string name="v_lkommen">Välkommen </string>
+    <string name="se_dina_inkomster">Se dina inkomster</string>
+    <string name="se_dina_utgifter">Se dina utgifter</string>
+    <string name="sammanst_llning">Sammanställning:</string>
+    <string name="l_gg_till">Lägg till</string>
+
+    <string-array name="Income_category">
+        <item>Lön</item>
+        <item>Övrigt</item>
+    </string-array>
+
+    <string-array name="Expense_category">
+        <item>Livsmedel</item>
+        <item>Fritid</item>
+        <item>Resor</item>
+        <item>Boende</item>
+        <item>Övrigt</item>
+    </string-array>
+</resources>

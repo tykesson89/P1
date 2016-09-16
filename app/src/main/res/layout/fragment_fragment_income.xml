@@ -1,0 +1,91 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+   android:orientation="vertical"
+    android:layout_height="wrap_content"
+    tools:context="com.example.henrik.p1.FragmentIncome"
+    android:weightSum="1">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/l_gg_till_ny_inkomst"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="14dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+            android:text="@string/kategori"
+            android:id="@+id/textView2" />
+
+        <Spinner
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerIncome"
+            android:layout_gravity="center_horizontal" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titel"/>
+        <EditText
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:id="@+id/etIncomeTitel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/belopp"/>
+        <EditText
+            android:layout_width="343dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/etAmount"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <CalendarView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/calendarIncome"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/l_gg_till"
+        android:id="@+id/btnInsertIncome"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>
+
+</ScrollView>
