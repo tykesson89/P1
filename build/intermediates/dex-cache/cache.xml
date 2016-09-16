@@ -47,7 +47,7 @@
         jar="C:\Users\Henrik\Documents\GitHub\P1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="24.0.2"
-        sha1="b3e4b1c1d8216b5b6174e77fb10ece16d32727e0">
+        sha1="ea0852dc1f3036be4ec0ece69aeb8e225906ce86">
         <dex dex="C:\Users\Henrik\Documents\GitHub\P1\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_8f57d9ea6bbe379a270a0619c374d63c8d527bb8\classes.dex" />
     </item>
     <item
@@ -61,7 +61,7 @@
         jar="C:\Users\Henrik\Documents\GitHub\P1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         revision="24.0.2"
-        sha1="85155329abf24e7f433dd50a27e56fa92ce1c5ad">
+        sha1="385dd162568228530ed53c7e76ee10c3fd8ca7b1">
         <dex dex="C:\Users\Henrik\Documents\GitHub\P1\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_1e1167b42cc644290e54d595de01517abb655762\classes.dex" />
     </item>
     <item
