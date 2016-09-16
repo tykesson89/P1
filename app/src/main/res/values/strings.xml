@@ -21,6 +21,10 @@
     <string name="se_dina_utgifter">Se dina utgifter</string>
     <string name="sammanst_llning">Sammanställning:</string>
     <string name="l_gg_till">Lägg till</string>
+    <string name="inkomster">Inkomster</string>
+    <string name="v_lj_ditt_tidsintevall">Välj ditt tidsintevall</string>
+    <string name="fr_n_datum">Från Datum</string>
+    <string name="till_datum">Till Datum</string>
 
     <string-array name="Income_category">
         <item>Lön</item>

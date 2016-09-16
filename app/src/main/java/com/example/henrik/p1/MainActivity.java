@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.commit();
 
         }
-        Controller controller = new Controller(this, new MainFragment(), new FragmentIncome());
+
     }
     public void swapFrag(Fragment fragment){
         FragmentManager fm = getFragmentManager();
