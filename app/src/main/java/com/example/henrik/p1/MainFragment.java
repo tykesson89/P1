@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class MainFragment extends Fragment {
     private Button btnNewIncome;
     private Button btnNewExpense;
+    private Button btnViewAllIncome;
     private Controller controller;
     private TextView tvName;
     private TextView tvIncome;
@@ -49,6 +50,7 @@ public class MainFragment extends Fragment {
     private void initComponents(View view){
         btnNewExpense = (Button)view.findViewById(R.id.btnNewExpense);
         btnNewIncome = (Button)view.findViewById(R.id.btnNewIncome);
+        btnViewAllIncome = (Button)view.findViewById(R.id.btnViewAllIncome);
         tvName = (TextView)view.findViewById(R.id.tvName);
         tvIncome = (TextView)view.findViewById(R.id.tvIncome);
         tvExpense = (TextView)view.findViewById(R.id.tvExpense);
@@ -57,6 +59,7 @@ public class MainFragment extends Fragment {
     private void initListeners(){
         btnNewIncome.setOnClickListener(new ButtonNewIncomeListener());
         btnNewExpense.setOnClickListener(new ButtonNewExpenseListener());
+        btnViewAllIncome.setOnClickListener(new ButtonViewAllIncomeListener());
     }
     private void setMenutext(){
         tvName.setText(((MainActivity)getActivity()).getSharedPreferences());
@@ -81,4 +84,10 @@ public class MainFragment extends Fragment {
     }
 
 
+    private class ButtonViewAllIncomeListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            ((MainActivity)getActivity()).swapFrag(new Fragment_ViewIncome());
+        }
+    }
 }

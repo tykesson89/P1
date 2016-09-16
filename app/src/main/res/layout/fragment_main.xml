@@ -114,7 +114,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/se_dina_inkomster"
-        android:id="@+id/button3"
+        android:id="@+id/btnViewAllIncome"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
