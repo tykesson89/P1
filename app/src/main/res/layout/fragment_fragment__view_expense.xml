@@ -34,6 +34,13 @@
             android:id="@+id/btnExpenseToDate"
             android:text="@string/till_datum" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Välj"
+            android:id="@+id/btnChooseExpense"
+            android:layout_marginLeft="8dp" />
+
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
