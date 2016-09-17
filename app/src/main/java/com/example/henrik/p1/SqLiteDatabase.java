@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * Created by Henrik on 2016-09-15.
@@ -23,9 +24,9 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table income " +
-        "(id integer primary key, incomedate date, titel text, category text, amount integer) ");
+        "(id integer primary key,  year integer, month integer, day integer, titel text, category text, amount double) ");
         db.execSQL("create table expense " +
-                "(id integer primary key, expensedate date, titel text, category text, price integer) ");
+                "(id integer primary key, year integer, month integer, day integer, titel text, category text, price double) ");
 
     }
 
@@ -36,11 +37,13 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertIncome  (String incomeDate, String titel, String category, int amount) {
+    public boolean insertIncome  (int year,int month,int day, String titel, String category, double amount) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("incomedate", incomeDate);
+        contentValues.put("year", year);
+        contentValues.put("month", month);
+        contentValues.put("day", day);
         contentValues.put("titel", titel);
         contentValues.put("category", category);
         contentValues.put("amount", amount);
@@ -48,14 +51,14 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
         Log.d("income inserted", " ");
         return true;
     }
-    public int getAllIncome(){
+    public double getAllIncome(){
         SQLiteDatabase db = this.getReadableDatabase();
-        int income = 0;
+        double income = 0;
         Cursor res =  db.rawQuery( "select amount from income", null );
         if(res.getCount()!=0) {
 
             while (res.moveToNext()) {
-                income += res.getInt(res.getColumnIndex("amount"));
+                income += res.getDouble(res.getColumnIndex("amount"));
             }
 
             return income;
@@ -64,26 +67,29 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public int getAllExpense(){
+    public double getAllExpense(){
         SQLiteDatabase db = this.getReadableDatabase();
-        int income = 0;
+        double expense = 0;
+
         Cursor res =  db.rawQuery( "select price from expense", null );
         if(res.getCount() != 0) {
 
             while (res.moveToNext()) {
-                income += res.getInt(res.getColumnIndex("price"));
+                expense += res.getDouble(res.getColumnIndex("price"));
             }
 
-            return income;
+            return expense;
         }else {
             return 0;
         }
     }
-    public boolean insertExpense  (String expenseDate, String titel, String category, int price) {
+    public boolean insertExpense  (int year,int month,int day, String titel, String category, double price) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("expensedate", expenseDate);
+        contentValues.put("year", year);
+        contentValues.put("month", month);
+        contentValues.put("day", day);
         contentValues.put("titel", titel);
         contentValues.put("category", category);
         contentValues.put("price", price);
@@ -93,4 +99,52 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
     }
 
 
+    public ArrayList<IncomeObject> getAllIncomeObjects(){
+        ArrayList<IncomeObject> incomeList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from income ORDER BY month,day,year DESC", null );
+
+
+            while (res.moveToNext()) {
+                IncomeObject incomeObject = new IncomeObject();
+                incomeObject.setAmount(res.getDouble(res.getColumnIndex("amount")));
+                incomeObject.setCategory(res.getString(res.getColumnIndex("category")));
+                incomeObject.setTitel(res.getString(res.getColumnIndex("titel")));
+                incomeObject.setYear(res.getInt(res.getColumnIndex("year")));
+                incomeObject.setMonth(res.getInt(res.getColumnIndex("month")));
+                incomeObject.setDay(res.getInt(res.getColumnIndex("day")));
+                incomeList.add(incomeObject);
+                Log.d(incomeObject.toString(),"");
+            }
+
+            return incomeList;
+
+
+    }
+
+    public ArrayList<ExpenseObject> getAllExpenseObjects(){
+        ArrayList<ExpenseObject> expenseList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "SELECT * FROM expense ORDER BY month,day,year DESC", null );
+
+
+        while (res.moveToNext()) {
+            ExpenseObject expenseObject = new ExpenseObject();
+            expenseObject.setPrice(res.getDouble(res.getColumnIndex("price")));
+            expenseObject.setCategory(res.getString(res.getColumnIndex("category")));
+            expenseObject.setYear(res.getInt(res.getColumnIndex("year")));
+            expenseObject.setMonth(res.getInt(res.getColumnIndex("month")));
+            expenseObject.setDay(res.getInt(res.getColumnIndex("day")));
+            expenseObject.setTitel(res.getString(res.getColumnIndex("titel")));
+            Log.d(expenseObject.toString(), "hej");
+            expenseList.add(expenseObject);
+
+        }
+
+        return expenseList;
+
+
+    }
 }

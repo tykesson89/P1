@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Titel"
-        android:id="@+id/tvIncomeTitel" />
+        android:id="@+id/tvExpenseTitel" />
 
 
 </LinearLayout>
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Amount"
-            android:id="@+id/tvIncomeAmount"
+            android:id="@+id/tvExpensePrice"
             android:layout_marginRight="16sp"/>
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:id="@+id/tvIncomeDate" />
+            android:id="@+id/tvExpenseDate" />
 
 
     </LinearLayout>

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,6 +41,7 @@ public class Fragment_ViewIncome extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment__view_income, container, false);
         initComponents(view);
         initListeners();
+        setAdapter();
         return view;
     }
 
@@ -115,6 +117,17 @@ public class Fragment_ViewIncome extends Fragment {
         public void onClick(View v) {
             openFromDate(v);
         }
+    }
+
+    public void setAdapter(){
+        AdapterIncome adapterIncome;
+        ArrayList<IncomeObject> myListItems  = new ArrayList<IncomeObject>();
+        SqLiteDatabase sqLiteDatabase = new SqLiteDatabase(getActivity());
+        myListItems = sqLiteDatabase.getAllIncomeObjects();
+
+
+        adapterIncome= new AdapterIncome (getActivity(), 0, myListItems);
+        lvIncomeView.setAdapter(adapterIncome);
     }
 }
 

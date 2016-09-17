@@ -17,6 +17,7 @@ public class MainFragment extends Fragment {
     private Button btnNewIncome;
     private Button btnNewExpense;
     private Button btnViewAllIncome;
+    private Button btnViewAllExpense;
     private Controller controller;
     private TextView tvName;
     private TextView tvIncome;
@@ -51,6 +52,7 @@ public class MainFragment extends Fragment {
         btnNewExpense = (Button)view.findViewById(R.id.btnNewExpense);
         btnNewIncome = (Button)view.findViewById(R.id.btnNewIncome);
         btnViewAllIncome = (Button)view.findViewById(R.id.btnViewAllIncome);
+        btnViewAllExpense = (Button)view.findViewById(R.id.btnViewAllExpense);
         tvName = (TextView)view.findViewById(R.id.tvName);
         tvIncome = (TextView)view.findViewById(R.id.tvIncome);
         tvExpense = (TextView)view.findViewById(R.id.tvExpense);
@@ -60,12 +62,13 @@ public class MainFragment extends Fragment {
         btnNewIncome.setOnClickListener(new ButtonNewIncomeListener());
         btnNewExpense.setOnClickListener(new ButtonNewExpenseListener());
         btnViewAllIncome.setOnClickListener(new ButtonViewAllIncomeListener());
+        btnViewAllExpense.setOnClickListener(new ButtonViewAllExpenseListener());
     }
     private void setMenutext(){
         tvName.setText(((MainActivity)getActivity()).getSharedPreferences());
-        tvIncome.setText(Integer.toString(db.getAllIncome()));
-        tvExpense.setText(Integer.toString(db.getAllExpense()));
-        tvTotal.setText(Integer.toString(db.getAllIncome()-db.getAllExpense()));
+        tvIncome.setText(Double.toString(db.getAllIncome()));
+        tvExpense.setText(Double.toString(db.getAllExpense()));
+        tvTotal.setText(Double.toString(db.getAllIncome()-db.getAllExpense()));
     }
 
 
@@ -88,6 +91,13 @@ public class MainFragment extends Fragment {
         @Override
         public void onClick(View v) {
             ((MainActivity)getActivity()).swapFrag(new Fragment_ViewIncome());
+        }
+    }
+
+    private class ButtonViewAllExpenseListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            ((MainActivity)getActivity()).swapFrag(new Fragment_ViewExpense());
         }
     }
 }

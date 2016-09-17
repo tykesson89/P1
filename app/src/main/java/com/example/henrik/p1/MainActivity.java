@@ -12,9 +12,6 @@ import android.util.Log;
 
 
 public class MainActivity extends AppCompatActivity {
-    private FragmentIncome fragmentIncome;
-    private FragmentLogin fragmentLogin;
-    private MainFragment mainFragment;
     private String tag = "myFragment";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
