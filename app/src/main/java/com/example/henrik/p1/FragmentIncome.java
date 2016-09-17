@@ -27,7 +27,7 @@ public class FragmentIncome extends Fragment {
         private EditText etIncomeTitel;
         private EditText etAmount;
         private Button btnInsertIncome;
-        private Controller controller;
+
         private SqLiteDatabase db;
         private int mYear;
         private int mDay;
@@ -36,9 +36,7 @@ public class FragmentIncome extends Fragment {
     public FragmentIncome() {
         // Required empty public constructor
     }
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
+
 
 
     @Override

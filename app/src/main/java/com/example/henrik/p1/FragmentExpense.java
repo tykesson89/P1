@@ -24,7 +24,6 @@ public class FragmentExpense extends Fragment {
     private EditText etExpenseTitel;
     private EditText etPrice;
     private Button btnInsertExpense;
-    private Controller controller;
     private SqLiteDatabase db;
     private int mYear;
     private int mMonth;
@@ -33,9 +32,8 @@ public class FragmentExpense extends Fragment {
     public FragmentExpense() {
         // Required empty public constructor
     }
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
+
+
 
 
     @Override

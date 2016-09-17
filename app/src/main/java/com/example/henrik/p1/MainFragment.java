@@ -2,9 +2,8 @@ package com.example.henrik.p1;
 
 
 
-import android.app.Activity;
+
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ public class MainFragment extends Fragment {
     private Button btnNewExpense;
     private Button btnViewAllIncome;
     private Button btnViewAllExpense;
-    private Controller controller;
     private TextView tvName;
     private TextView tvIncome;
     private TextView tvExpense;
@@ -43,9 +41,7 @@ public class MainFragment extends Fragment {
         setMenutext();
         return view;
     }
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
+
 
 
     private void initComponents(View view){
