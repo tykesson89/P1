@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
-
+import android.widget.Toast;
 
 
 /**
@@ -24,16 +24,16 @@ public class FragmentExpense extends Fragment {
     private EditText etExpenseTitel;
     private EditText etPrice;
     private Button btnInsertExpense;
-    private Controller controller;
     private SqLiteDatabase db;
-    private String selectedDate;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
 
     public FragmentExpense() {
         // Required empty public constructor
     }
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
+
+
 
 
     @Override
@@ -51,6 +51,7 @@ public class FragmentExpense extends Fragment {
     private void initComponents(View view){
         spinnerExpense = (Spinner)view.findViewById(R.id.spinnerExpense);
         calendarExpense = (CalendarView)view.findViewById(R.id.calendarExpense);
+        calendarExpense.setSelected(false);
         etExpenseTitel = (EditText)view.findViewById(R.id.etExpenseTitel);
         etPrice = (EditText)view.findViewById(R.id.etPrice);
         btnInsertExpense = (Button)view.findViewById(R.id.btnInsertExpense);
@@ -73,7 +74,11 @@ public class FragmentExpense extends Fragment {
         @Override
         public void onClick(View v) {
             String expenseCatergory = spinnerExpense.getSelectedItem().toString();
-            db.insertExpense(selectedDate, etExpenseTitel.getText().toString(), expenseCatergory, Integer.parseInt(etPrice.getText().toString()));
+            if(calendarExpense.isSelected()) {
+                db.insertExpense(mYear, mMonth, mDay, etExpenseTitel.getText().toString(), expenseCatergory, Integer.parseInt(etPrice.getText().toString()));
+            }else{
+                Toast.makeText(getActivity(), "Du måste välja ett datum", Toast.LENGTH_LONG);
+            }
 
         }
     }
@@ -81,7 +86,10 @@ public class FragmentExpense extends Fragment {
     private class DateChangeListener implements CalendarView.OnDateChangeListener {
         @Override
         public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-            selectedDate = year + "-"+month+"-"+dayOfMonth;
+            mDay = dayOfMonth;
+            mYear = year;
+            mMonth = (month+1);
+            calendarExpense.setSelected(true);
         }
     }
 }

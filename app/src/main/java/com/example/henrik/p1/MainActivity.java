@@ -1,5 +1,6 @@
 package com.example.henrik.p1;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 
@@ -9,12 +10,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
 
 
-public class MainActivity extends AppCompatActivity {
-    private FragmentIncome fragmentIncome;
-    private FragmentLogin fragmentLogin;
-    private MainFragment mainFragment;
+public class MainActivity extends Activity {
     private String tag = "myFragment";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
