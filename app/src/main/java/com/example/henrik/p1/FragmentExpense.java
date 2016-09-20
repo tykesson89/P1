@@ -74,12 +74,21 @@ public class FragmentExpense extends Fragment {
         @Override
         public void onClick(View v) {
             String expenseCatergory = spinnerExpense.getSelectedItem().toString();
-            if(calendarExpense.isSelected()) {
-                db.insertExpense(mYear, mMonth, mDay, etExpenseTitel.getText().toString(), expenseCatergory, Integer.parseInt(etPrice.getText().toString()));
+            if(etPrice.getText().length() >= 1 && etExpenseTitel.getText().length() >= 1 ) {
+                if (calendarExpense.isSelected()) {
+                    ExpenseObject expenseObject = new ExpenseObject(Double.parseDouble(etPrice.getText().toString()),
+                            expenseCatergory, etExpenseTitel.getText().toString(), mMonth, mYear, mDay);
+                    ((MainActivity) getActivity()).insertExpense(expenseObject);
+                } else {
+                    ((MainActivity)getActivity()).setToast("Du måste välja ett datum");
+                }
             }else{
-                Toast.makeText(getActivity(), "Du måste välja ett datum", Toast.LENGTH_LONG);
+                if(etPrice.getText().length()  < 1) {
+                    etPrice.setError("Skriv in belopp");
+                }if(etExpenseTitel.getText().length() < 1) {
+                    etExpenseTitel.setError("Skriv en titel");
+                }
             }
-
         }
     }
 

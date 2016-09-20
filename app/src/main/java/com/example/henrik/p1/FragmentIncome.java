@@ -45,8 +45,6 @@ public class FragmentIncome extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment_income, container, false);
         initComponents(view);
         setAdapter();
-        db = new SqLiteDatabase(getActivity());
-        db.getWritableDatabase();
         initListeners();
         return view;
     }
@@ -77,12 +75,21 @@ public class FragmentIncome extends Fragment {
         @Override
         public void onClick(View v) {
            String incomeCatergory = spinnerIncome.getSelectedItem().toString();
-            if(calendarIncome.isSelected()) {
-                db.insertIncome(mYear, mMonth, mDay, etIncomeTitel.getText().toString(), incomeCatergory, Integer.parseInt(etAmount.getText().toString()));
+            if(etAmount.getText().length() >= 1 && etIncomeTitel.getText().length()>=1) {
+                if (calendarIncome.isSelected()) {
+                    IncomeObject incomeObject = new IncomeObject(Double.parseDouble(etAmount.getText().toString()), incomeCatergory, etIncomeTitel.getText().toString(), mMonth, mYear, mDay);
+                    ((MainActivity) getActivity()).insertIncome(incomeObject);
 
+                } else {
+                    ((MainActivity)getActivity()).setToast("Du måste välja ett datum");
+
+                }
             }else {
-                Toast.makeText(getActivity(), "Du måste välja ett datum", Toast.LENGTH_LONG);
-
+                if(etAmount.getText().length()  < 1) {
+                    etAmount.setError("Skriv in belopp");
+                }if(etIncomeTitel.getText().length() < 1) {
+                    etIncomeTitel.setError("Skriv en titel");
+                }
             }
         }
     }

@@ -25,6 +25,11 @@
     <string name="v_lj_ditt_tidsintevall">Välj ditt tidsintevall</string>
     <string name="fr_n_datum">Från Datum</string>
     <string name="till_datum">Till Datum</string>
+    <string name="v_lj_r">Välj år:</string>
+    <string name="v_lj_m_nad">Välj månad:</string>
+    <string name="inkomster_vald_m_nad">Inkomster vald månad:</string>
+    <string name="utgifter_vald_m_nad">Utgifter vald månad:</string>
+    <string name="m_nadens_resultat">Månadens resultat:</string>
 
     <string-array name="Income_category">
         <item>Lön</item>
@@ -37,5 +42,27 @@
         <item>Resor</item>
         <item>Boende</item>
         <item>Övrigt</item>
+    </string-array>
+    <string-array name="Year">
+        <item>2016</item>
+        <item>2015</item>
+        <item>2014</item>
+        <item>2013</item>
+        <item>2012</item>
+    </string-array>
+
+    <string-array name="month">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Mars</item>
+        <item>April</item>
+        <item>Maj</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Augusti</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 </resources>

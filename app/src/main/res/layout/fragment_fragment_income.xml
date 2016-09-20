@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="@string/titel"/>
         <EditText
-            android:layout_width="342dp"
+            android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:id="@+id/etIncomeTitel" />
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="@string/belopp"/>
         <EditText
-            android:layout_width="343dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/etAmount"
             android:inputType="number" />

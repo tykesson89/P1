@@ -4,6 +4,7 @@ package com.example.henrik.p1;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,9 @@ public class MainFragment extends Fragment {
     private Button btnNewExpense;
     private Button btnViewAllIncome;
     private Button btnViewAllExpense;
+    private Button btnEconomicalOverview;
+    private Button btnScanBarcode;
     private TextView tvName;
-    private TextView tvIncome;
-    private TextView tvExpense;
-    private TextView tvTotal;
-    SqLiteDatabase db;
 
 
 
@@ -36,7 +35,6 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_main, container, false);
         initComponents(view);
-        db = new SqLiteDatabase(getActivity());
        initListeners();
         setMenutext();
         return view;
@@ -49,22 +47,21 @@ public class MainFragment extends Fragment {
         btnNewIncome = (Button)view.findViewById(R.id.btnNewIncome);
         btnViewAllIncome = (Button)view.findViewById(R.id.btnViewAllIncome);
         btnViewAllExpense = (Button)view.findViewById(R.id.btnViewAllExpense);
+        btnEconomicalOverview = (Button)view.findViewById(R.id.btnEconomicalOverview);
+        btnScanBarcode  = (Button)view.findViewById(R.id.btnScanBarcode);
         tvName = (TextView)view.findViewById(R.id.tvName);
-        tvIncome = (TextView)view.findViewById(R.id.tvIncome);
-        tvExpense = (TextView)view.findViewById(R.id.tvExpense);
-        tvTotal = (TextView)view.findViewById(R.id.tvTotal);
+
     }
     private void initListeners(){
         btnNewIncome.setOnClickListener(new ButtonNewIncomeListener());
         btnNewExpense.setOnClickListener(new ButtonNewExpenseListener());
         btnViewAllIncome.setOnClickListener(new ButtonViewAllIncomeListener());
         btnViewAllExpense.setOnClickListener(new ButtonViewAllExpenseListener());
+        btnEconomicalOverview.setOnClickListener(new ButtonEconomicOverviewListener());
+        btnScanBarcode.setOnClickListener(new ButtonScanBarcode());
     }
     private void setMenutext(){
         tvName.setText(((MainActivity)getActivity()).getSharedPreferences());
-        tvIncome.setText(Double.toString(db.getAllIncome()));
-        tvExpense.setText(Double.toString(db.getAllExpense()));
-        tvTotal.setText(Double.toString(db.getAllIncome()-db.getAllExpense()));
     }
 
 
@@ -94,6 +91,21 @@ public class MainFragment extends Fragment {
         @Override
         public void onClick(View v) {
             ((MainActivity)getActivity()).swapFrag(new Fragment_ViewExpense());
+        }
+    }
+
+    private class ButtonEconomicOverviewListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            ((MainActivity)getActivity()).swapFrag(new FragmentEconomicOverview());
+        }
+    }
+
+    private class ButtonScanBarcode implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            ((MainActivity)getActivity()).intentToBarcode();
+
         }
     }
 }

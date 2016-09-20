@@ -9,12 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -133,15 +130,11 @@ public class Fragment_ViewExpense extends Fragment {
     }
 
     public void initMyListItem(){
-
-        SqLiteDatabase sqLiteDatabase = new SqLiteDatabase(getActivity());
-        myListItems = sqLiteDatabase.getAllExpenseObjects();
+    myListItems = ((MainActivity)getActivity()).getExpenseListFromDB();
         setAdapter(myListItems);
     }
 
     public void setAdapter(ArrayList<ExpenseObject> arrayList){
-
-
         AdapterExpense adapterExpense;
         adapterExpense= new AdapterExpense (getActivity(), 0, arrayList);
         lvExpenseView.setAdapter(adapterExpense);
@@ -176,19 +169,7 @@ public class Fragment_ViewExpense extends Fragment {
         ArrayList<ExpenseObject> arrayList = new ArrayList<>();
         @Override
         public void onClick(View v) {
-            LocalDate dateStart = new LocalDate(dateFrom);
-            LocalDate dateEnd = new LocalDate(dateTo);
-
-            arrayList.clear();
-            for(int i = 0; i < myListItems.size(); i++){
-                LocalDate current = new LocalDate(myListItems.get(i).getFormatedDate());
-
-                if(current.isAfter(dateStart)&&current.isBefore(dateEnd)||current.isEqual(dateStart)||current.isEqual(dateEnd)){
-                    arrayList.add(myListItems.get(i));
-                    Log.d(current.toString(),"hej");
-                }
-
-            }
+            arrayList = ((MainActivity)getActivity()).getSortedExpenseList(dateFrom, dateTo);
             setAdapter(arrayList);
 
         }

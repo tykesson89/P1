@@ -37,62 +37,32 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertIncome  (int year,int month,int day, String titel, String category, double amount) {
+    public boolean insertIncome  (IncomeObject incomeObject) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("year", year);
-        contentValues.put("month", month);
-        contentValues.put("day", day);
-        contentValues.put("titel", titel);
-        contentValues.put("category", category);
-        contentValues.put("amount", amount);
+        contentValues.put("year", incomeObject.getYear());
+        contentValues.put("month", incomeObject.getMonth());
+        contentValues.put("day", incomeObject.getDay());
+        contentValues.put("titel", incomeObject.getTitel());
+        contentValues.put("category", incomeObject.getCategory());
+        contentValues.put("amount", incomeObject.getAmount());
         db.insert("income", null, contentValues);
         Log.d("income inserted", " ");
         return true;
     }
-    public double getAllIncome(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        double income = 0;
-        Cursor res =  db.rawQuery( "select amount from income", null );
-        if(res.getCount()!=0) {
 
-            while (res.moveToNext()) {
-                income += res.getDouble(res.getColumnIndex("amount"));
-            }
 
-            return income;
-        }else {
-            return 0;
-        }
-    }
-
-    public double getAllExpense(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        double expense = 0;
-
-        Cursor res =  db.rawQuery( "select price from expense", null );
-        if(res.getCount() != 0) {
-
-            while (res.moveToNext()) {
-                expense += res.getDouble(res.getColumnIndex("price"));
-            }
-
-            return expense;
-        }else {
-            return 0;
-        }
-    }
-    public boolean insertExpense  (int year,int month,int day, String titel, String category, double price) {
+    public boolean insertExpense  (ExpenseObject expenseObject) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("year", year);
-        contentValues.put("month", month);
-        contentValues.put("day", day);
-        contentValues.put("titel", titel);
-        contentValues.put("category", category);
-        contentValues.put("price", price);
+        contentValues.put("year", expenseObject.getYear());
+        contentValues.put("month", expenseObject.getMonth());
+        contentValues.put("day", expenseObject.getDay());
+        contentValues.put("titel", expenseObject.getTitel());
+        contentValues.put("category", expenseObject.getCategory());
+        contentValues.put("price", expenseObject.getPrice());
         db.insert("expense", null, contentValues);
         Log.d("expense inserted", " ");
         return true;
@@ -146,5 +116,30 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
         return expenseList;
 
 
+    }
+    public int[] getIncomeExpenseResultFromDB(int month, int year){
+        int[] arr = new int[3];
+        int income = 0;
+        int expense = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String strIncome = "SELECT amount from income where "+month+" = month and "+year+" = year";
+        Cursor resIncome =  db.rawQuery(strIncome, null);
+
+        while (resIncome.moveToNext()){
+            income += resIncome.getInt(resIncome.getColumnIndex("amount"));
+        }
+        arr[0]=income;
+
+        String strExpense = "SELECT price from expense where "+month+" = month and "+year+" = year";
+        Cursor resExpense =  db.rawQuery(strExpense, null);
+
+        while (resExpense.moveToNext()){
+            expense += resExpense.getInt(resExpense.getColumnIndex("price"));
+        }
+        arr[1]=expense;
+        arr[2]=income-expense;
+
+
+        return arr;
     }
 }

@@ -137,15 +137,11 @@ public class Fragment_ViewIncome extends Fragment {
         }
     }
     public void initMyListItem(){
-
-        SqLiteDatabase sqLiteDatabase = new SqLiteDatabase(getActivity());
-        myListItems = sqLiteDatabase.getAllIncomeObjects();
+        myListItems = ((MainActivity)getActivity()).getIncomeListFromDB();
      setAdapter(myListItems);
     }
 
     public void setAdapter(ArrayList<IncomeObject> arrayList){
-
-
         AdapterIncome adapterIncome;
         adapterIncome= new AdapterIncome (getActivity(), 0, arrayList);
         lvIncomeView.setAdapter(adapterIncome);
@@ -180,19 +176,7 @@ public class Fragment_ViewIncome extends Fragment {
         ArrayList<IncomeObject> arrayList = new ArrayList<>();
         @Override
         public void onClick(View v) {
-            LocalDate dateStart = new LocalDate(dateFrom);
-            LocalDate dateEnd = new LocalDate(dateTo);
-
-                    arrayList.clear();
-                for(int i = 0; i < myListItems.size(); i++){
-                    LocalDate current = new LocalDate(myListItems.get(i).getFormatedDate());
-
-                    if(current.isAfter(dateStart)&&current.isBefore(dateEnd)||current.isEqual(dateStart)||current.isEqual(dateEnd)){
-                        arrayList.add(myListItems.get(i));
-                        Log.d(current.toString(),"hej");
-                    }
-
-                }
+            arrayList = ((MainActivity)getActivity()).getSortedIncomeList(dateFrom, dateTo);
             setAdapter(arrayList);
         }
     }
