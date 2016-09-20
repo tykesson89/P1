@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 
             FragmentManager fm = getFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.add(R.id.main_container, new FragmentLogin(), tag);
+            fragmentTransaction.replace(R.id.main_container, new FragmentLogin(), tag);
             fragmentTransaction.commit();
 
         }

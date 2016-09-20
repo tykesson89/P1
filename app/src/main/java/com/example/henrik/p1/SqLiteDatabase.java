@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.google.android.gms.vision.barcode.Barcode;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -27,6 +29,8 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
         "(id integer primary key,  year integer, month integer, day integer, titel text, category text, amount double) ");
         db.execSQL("create table expense " +
                 "(id integer primary key, year integer, month integer, day integer, titel text, category text, price double) ");
+        db.execSQL("create table barcodetable " +
+                "(id integer primary key, barcode text, titel text, category text, price double) ");
 
     }
 
@@ -34,6 +38,7 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS income");
         db.execSQL("DROP TABLE IF EXISTS expense");
+        db.execSQL("DROP TABLE IF EXISTS barcodetable");
         onCreate(db);
     }
 
@@ -141,5 +146,40 @@ public class SqLiteDatabase extends SQLiteOpenHelper {
 
 
         return arr;
+    }
+
+    public boolean checkDBForResult(Barcode barcode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String str = "SELECT barcode from barcodetable where "+barcode.displayValue+" = barcode";
+        Cursor res =  db.rawQuery(str , null );
+        if(res.getCount() == 0){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public BarcodeObject getBarcodeFromDB(Barcode barcode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String str = "SELECT * from barcodetable where "+barcode.displayValue+" = barcode";
+        Cursor res =  db.rawQuery(str , null );
+        res.moveToFirst();
+        BarcodeObject barcodeObject = new BarcodeObject(barcode.displayValue, res.getString(res.getColumnIndex("titel")),
+                res.getString(res.getColumnIndex("category")), res.getDouble(res.getColumnIndex("price")));
+
+        return barcodeObject;
+    }
+
+    public void insertBarcode(BarcodeObject barcodeObject) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("barcode", barcodeObject.getBarcode());
+        contentValues.put("titel", barcodeObject.getTitel());
+        contentValues.put("category", barcodeObject.getCategory());
+        contentValues.put("price", barcodeObject.getPrice());
+
+        db.insert("barcodetable", null, contentValues);
+        Log.d("expense inserted", " ");
+
     }
 }
